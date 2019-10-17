@@ -33,7 +33,7 @@ public class Main3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(validate()){
-
+                    //some code associated with database goes here
                 }
             }
         });
