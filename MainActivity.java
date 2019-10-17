@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity  {
     private enum Operator {none, login, signin,}
@@ -45,24 +46,21 @@ public class MainActivity extends Activity  {
     public void OnClick(View arg0){
         switch(arg0.getId()){
             case R.id.signin:
-                Intent intent_signin = new Intent();
-                MainActivity(intent_signin);
+                Intent intent_signin = new Intent(getApplicationContext(),Registration.class);//这边需要连接注册地方
+                startActivity(intent_signin);
                 break;
             case R.id.login:
                 String user_name = username.getText().toString();
                 String password = password_1.getText().toString().trim();
-
                 if(user_name.isEmpty() ){
-                    System.out.println("Re-enter the username please");
+                    Toast.makeText(this,"Re-enter the username please",Toast.LENGTH_SHORT).show();
                 }
-                if(password.isEmpty()){
-                    System.out.println("Re-enter the password please");
+                if(password.isEmpty()) {
+                    Toast.makeText(this,"Re-enter the password please",Toast.LENGTH_SHORT).show();
+                    
                 }
-
-                @Override
-                        public
-
-
+                Intent intent_login = new Intent(getApplicationContext(),Welcome.class);
+                startActivity(intent_login);
                 break;
 
 
