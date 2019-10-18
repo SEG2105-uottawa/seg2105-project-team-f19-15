@@ -1,1 +1,25 @@
 //
+class Admin
+{
+  1 -- * Patient;
+  1 -- * Employee;
+}
+
+class Employee
+{
+  name;
+  username;
+  password;
+}
+
+class Patient
+{
+  name;
+  username;
+  password;
+}
+
+class Login
+{
+  
+}
