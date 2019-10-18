@@ -17,6 +17,7 @@ public class Welcome extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         LastNameLayout = (TextView) findViewById(R.id.welcome);
+        
         AccountNameLayout = (TextView) findViewById(R.id.loginas);
         Intent intent = getIntent();
         String layoutName = intent.getStringExtra("data_name");
