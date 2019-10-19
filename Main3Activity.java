@@ -8,13 +8,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 public class Main3Activity extends AppCompatActivity {
 
-    private EditText accountName, userPassword, comfirmedPassword, userEmail;
+    private EditText firstName, userPassword, comfirmedPassword, userEmail;
     private Button register;
     private TextView userLogin;
+    private MyDBHandler db;
 
 
     @Override
@@ -22,7 +21,8 @@ public class Main3Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
-        accountName= (EditText)findViewById(R.id.etAccountName);
+        db= new MyDBHandler(this);
+        firstName= (EditText)findViewById(R.id.etfisrtName);
         userPassword= (EditText)findViewById(R.id.et2Password);
         comfirmedPassword= (EditText)findViewById(R.id.et2comfirmPassword);
         userEmail= (EditText)findViewById(R.id.etEmail);
@@ -32,9 +32,32 @@ public class Main3Activity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validate()){
-                    //some code associated with database goes here
+
+                String name= firstName.getText().toString();
+                String password1= userPassword.getText().toString();
+                String email= userEmail.getText().toString();
+                String password2= comfirmedPassword.getText().toString();
+
+                if(name.isEmpty() && password1.isEmpty() && email.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please enter more details.", Toast.LENGTH_SHORT).show();
+
+                }else{
+                    if(password1.equals(password2)){
+                        account newAccount= new account(name, password1, email, Identity.employee);
+                        account findAccount= db.findPerson(newAccount.getName(), newAccount.getPassword());
+                        if(findAccount!= null){
+                            db.addAcount(newAccount);
+                            Toast.makeText(getApplicationContext(), "You have registered successfully.", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "User already exists", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Password do not match", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
             }
         });
 
@@ -46,25 +69,6 @@ public class Main3Activity extends AppCompatActivity {
             }
         });
 
-
-    }
-
-    private Boolean validate(){
-        boolean flag= false;
-
-        String name= accountName.getText().toString();
-        String password1= userPassword.getText().toString();
-        String email= userEmail.getText().toString();
-        String password2= comfirmedPassword.getText().toString();
-
-        if(name.isEmpty() && password1.isEmpty() && email.isEmpty()){
-            Toast.makeText(this, "Please enter more details!", Toast.LENGTH_SHORT).show();
-        }else if(password1.equals(password2)){
-            Toast.makeText(this, "Two passwords you entered does not match!", Toast.LENGTH_SHORT).show();
-        }else{
-            flag= true;
-        }
-        return flag;
 
     }
 
