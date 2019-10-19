@@ -1,4 +1,4 @@
-package com.example.project;
+﻿package com.example.project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -46,7 +46,7 @@ public class MainActivity extends Activity  {
     public void OnClick(View arg0){
         switch(arg0.getId()){
             case R.id.signin:
-                Intent intent_signin = new Intent(getApplicationContext(),Registration.class);//这边需要连接注册地方
+                Intent intent_signin = new Intent(getApplicationContext(), Main3Activity.class);
                 startActivity(intent_signin);
                 break;
             case R.id.login:
