@@ -2,18 +2,18 @@ package com.example.project;
 
 import java.io.Serializable;
 
-public class Account implements Serializable {
+public class account implements Serializable {
     private String name;
     private String password;
     private String email;
     private Identity identity;
-    public Account(String name, String password,String email,Identity identity){
+    public account(String name, String password,String email,Identity identity){
         this.name =name;
         this.password = password;
         this.email = email;
         this.identity= identity;
     }
-    public Account(){
+    public account(){
 
     }
 
