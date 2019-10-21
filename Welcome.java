@@ -1,28 +1,18 @@
-package com.example.segproject;
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.TextView;
+package com.example.seg2105project1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Welcome extends AppCompatActivity {
-    private TextView LastNameLayout;
-    private TextView AccountNameLayout;
-    private String layoutName;
-    private String layoutAccount;
+import android.os.Bundle;
+import android.widget.TextView;
 
+public class Main2Activity extends AppCompatActivity {
+
+    private TextView welcome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_main2);
 
-        LastNameLayout = (TextView) findViewById(R.id.welcome);
-        
-        AccountNameLayout = (TextView) findViewById(R.id.loginas);
-        Intent intent = getIntent();
-        String layoutName = intent.getStringExtra("data_name");
-        LastNameLayout.setText(layoutName);
-        String layoutAccount = intent.getStringExtra("data_account");
-        AccountNameLayout.setText(layoutAccount);
+        welcome= (TextView)findViewById(R.id.tv_welcome);
     }
 }
