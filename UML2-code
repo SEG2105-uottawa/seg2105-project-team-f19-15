@@ -1,0 +1,76 @@
+generate Java;
+
+class Admin
+{
+    isA User;
+}
+
+class Employee
+{
+    isA User;
+}
+
+class Patient
+{
+    isA User;
+}
+
+class Login
+{
+  username;
+password;
+errorText;
+Botton loginConfirm;
+1 -- 1 Welcome;
+  1 -- * User;
+}
+
+class Register
+{
+  username;
+  password;
+  passwordConfirm;
+  Botton registerConfirm;
+  1 -- 1 User;
+}
+
+class Welcome
+{
+  username;
+  userType;
+  Botton addService;
+  Botton editService;
+    Botton deleteService;
+}class User
+{
+  name;
+  username;
+  password;
+   type;
+}
+
+class Add
+{
+  Botton addConfirm;
+  * -- 1 Welcome;
+  1 -- * Service;
+}
+
+class Edit
+{
+  Botton editConfirm;
+  * -- 1 Welcome;
+  0..1 -- * Service;
+}
+
+class Delete
+{
+  Botton deleteConfirm;
+  * -- 1 Welcome;
+  0..1 -- * Service;
+}
+
+class Service
+{
+  serviceName;
+}
