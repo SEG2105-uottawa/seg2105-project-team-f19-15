@@ -31,21 +31,22 @@ public class LocalUnit2Test {
         assertEquals("5TQ5TS",AccountTest.getPassword());
 
     }
+    @Test
      public void corrsctToString(){
         assertEquals("ShuaiWudi 1229087652@qq.com patient",AccountTest.toString());
     }
     public void correctSetIdentity(){
         assertEquals(Identity.employee,AccountTest.setIdentity(Identity.employee));
     }
-    
+    @Test
     public void correctSetName(){
         assertEquals("Shuainiubi",AccountTest.setName("Shuainiubi"));
     }
-    
+    @Test
     public void correctSetEmail(){
         assertEquals("199283746@qq.com",AccountTest.setEmail("199283746@qq.com"));
     }
-    
+    @Test
     public void correctSetPassword(){
          assertEquals("11223369",AccountTest.setPassword("11223369"));
     }
