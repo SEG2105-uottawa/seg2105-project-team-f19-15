@@ -2,17 +2,30 @@ generate Java;
 
 class Admin
 {
-    isA User;
+     
+  1 -- * Employee;
+  1 -- * Patient;
+  1 -- 1 Login;
+  1 -- * Service;
 }
 
 class Employee
 {
-    isA User;
+     
+  name;
+  username;
+  password;
+  1 -- 1 Register;
+  1 -- 1 Login;
 }
 
 class Patient
 {
-    isA User;
+     
+  name;
+  username;
+  password;
+  1 -- 1 Register;
 }
 
 class Login
@@ -22,7 +35,7 @@ password;
 errorText;
 Botton loginConfirm;
 1 -- 1 Welcome;
-  1 -- * User;
+    1 -- 1 Patient;
 }
 
 class Register
@@ -31,46 +44,19 @@ class Register
   password;
   passwordConfirm;
   Botton registerConfirm;
-  1 -- 1 User;
-}
+  }
 
 class Welcome
 {
   username;
   userType;
-  Botton addService;
-  Botton editService;
-    Botton deleteService;
-}class User
-{
-  name;
-  username;
-  password;
-   type;
-}
-
-class Add
-{
-  Botton addConfirm;
-  * -- 1 Welcome;
-  1 -- * Service;
-}
-
-class Edit
-{
-  Botton editConfirm;
-  * -- 1 Welcome;
-  0..1 -- * Service;
-}
-
-class Delete
-{
-  Botton deleteConfirm;
-  * -- 1 Welcome;
-  0..1 -- * Service;
+  welcomeText;
 }
 
 class Service
 {
   serviceName;
+  Botton add;
+  Botton edit;
+  Botton delete;
 }
