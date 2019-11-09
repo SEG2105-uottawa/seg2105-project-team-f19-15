@@ -1,0 +1,39 @@
+class Admin
+{
+  1 -- * Patient;
+  1 -- * Employee;
+  
+  1 -- 1 Login;
+}
+
+class Employee
+{
+  name;
+  username;
+  password;
+  
+  1 -- 1 Login;
+  1 -- 1 Register;
+}
+
+class Patient
+{
+  name;
+  username;
+  password;
+  1 -- 1 Register;
+}
+
+class Login
+{
+  1 -- 1 Patient;
+  1 -- 1 Welcome;
+}
+
+class Register
+{
+}
+
+class Welcome
+{
+}
