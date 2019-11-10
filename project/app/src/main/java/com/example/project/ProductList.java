@@ -26,10 +26,12 @@ public class ProductList extends ArrayAdapter<Product> {
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
         TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.textViewPrice);
+        TextView textViewPerson = (TextView) listViewItem.findViewById(R.id.textViewPerson);
 
         Product product = products.get(position);
         textViewName.setText(product.getProductName());
         textViewPrice.setText(String.valueOf(product.getPrice()));
+        textViewPerson.setText(product.getPerson());
         return listViewItem;
     }
 }
