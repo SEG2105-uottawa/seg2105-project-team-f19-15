@@ -19,22 +19,31 @@
         android:layout_below="@id/editTextName"
         android:hint="Enter price" />
 
+
+    <EditText
+        android:id="@+id/editTextPerson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextPrice"
+        android:hint="Enter person"/>
+
     <Button
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextPrice"
-        android:layout_centerInParent="true"
+        android:layout_below="@id/editTextPerson"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:onClick="onAddCLick"
         android:text="Add" />
-
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/addButton"
+        android:layout_marginTop="7dp"
         android:text="Services"
         android:textAlignment="center" />
 
@@ -42,6 +51,7 @@
         android:id="@+id/listViewProducts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"></ListView>
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="7dp"></ListView>
 
 </RelativeLayout>
