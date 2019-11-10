@@ -28,6 +28,7 @@ public class Main5Activity extends AppCompatActivity {
 
     EditText editTextName;
     EditText editTextPrice;
+    EditText editTextPerson;
     Button buttonAddProduct;
     ListView listViewProducts;
     DatabaseReference databaseProducts;
@@ -41,6 +42,7 @@ public class Main5Activity extends AppCompatActivity {
 
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextPrice = (EditText) findViewById(R.id.editTextPrice);
+        editTextPerson = (EditText) findViewById(R.id.editTextPerson);
         listViewProducts = (ListView) findViewById(R.id.listViewProducts);
         buttonAddProduct = (Button) findViewById(R.id.addButton);
 
@@ -108,6 +110,7 @@ public class Main5Activity extends AppCompatActivity {
 
         final EditText editTextName = (EditText) dialogView.findViewById(R.id.editTextName);
         final EditText editTextPrice  = (EditText) dialogView.findViewById(R.id.editTextPrice);
+        final EditText editTextPerson  = (EditText) dialogView.findViewById(R.id.editTextPerson);
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateProduct);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteProduct);
 
@@ -120,8 +123,9 @@ public class Main5Activity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = editTextName.getText().toString().trim();
                 double price = Double.parseDouble(String.valueOf(editTextPrice.getText().toString()));
+                String person = editTextPerson.getText().toString().trim();
                 if (!TextUtils.isEmpty(name)) {
-                    updateProduct(productId, name, price);
+                    updateProduct(productId, name, price,person);
                     b.dismiss();
                 }
             }
@@ -136,13 +140,13 @@ public class Main5Activity extends AppCompatActivity {
         });
     }
 
-    private void updateProduct(String id, String name, double price) {
+    private void updateProduct(String id, String name, double price, String person) {
 
 
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("products").child(id);
 
 
-        Product product = new Product(id, name, price);
+        Product product = new Product(id, name, price,person);
         dR.setValue(product);
         Toast.makeText(getApplicationContext(), "Product Updated", Toast.LENGTH_LONG).show();
     }
@@ -161,16 +165,18 @@ public class Main5Activity extends AppCompatActivity {
     private void addProduct() {
         String name = editTextName.getText().toString().trim();
         double price = Double.parseDouble(String.valueOf(editTextPrice.getText().toString()));
+        String person = editTextPerson.getText().toString().trim();
         if(!TextUtils.isEmpty(name)){
 
             String id = databaseProducts.push().getKey();
 
-            Product product = new Product(id, name, price);
+            Product product = new Product(id, name, price,person);
 
             databaseProducts.child(id).setValue(product);
 
             editTextName.setText("");
             editTextPrice.setText("");
+            editTextPerson.setText("");
 
 
             //displaying a success toast
