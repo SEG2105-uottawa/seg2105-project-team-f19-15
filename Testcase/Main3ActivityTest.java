@@ -16,6 +16,7 @@ import org.junit.After;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class Main3ActivityTest {
     @Rule
@@ -51,8 +52,32 @@ public class Main3ActivityTest {
         text.setText("a12345defghijk");
         assertEquals(false, text.getText().toString().isEmail());
     }
-
-    public void checkPassword {
-    	///
+    @Test
+   //case 1: the 2 password is match
+    public void checkPassword throws Exception{
+    	assertNotNull(mActivity.findViewById(R.id.et2Password));
+    	assertNotNull(mActivity.findViewById(R.id.et2comfirmPassword));
+    	
+        text1 = mActivity.findViewById(R.id.et2Password);
+        text2 = mActivity.findViewById(R.id.et2comfirmPassword);
+        
+        text1.setText("sdfijo");
+        text2.setText("sdfijo")
+        assertEquals(text1.getText().toString(), text2.getText().toString());
+    	
+    }
+    @Test
+    //case 2: the 2 password is not match
+    public void checkPassword throws Exception{
+    	assertNotNull(mActivity.findViewById(R.id.et2Password));
+    	assertNotNull(mActivity.findViewById(R.id.et2comfirmPassword));
+    	
+        text1 = mActivity.findViewById(R.id.et2Password);
+        text2 = mActivity.findViewById(R.id.et2comfirmPassword);
+        
+        text1.setText("123sdfijo");
+        text2.setText("000sdfijo")
+        assertNotEquals(text1.getText().toString(), text2.getText().toString());
+    	
     }
 }
