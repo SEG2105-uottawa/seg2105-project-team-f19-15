@@ -23,7 +23,7 @@ public class MainActivityTest {
     public void setUp() throws Exception {
         mActivity=mActivityTestRule.getActivity();
     }
-    private TextView text;
+   
 
     @Test
     @UiThreadTest
