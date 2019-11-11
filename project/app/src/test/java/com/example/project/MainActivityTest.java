@@ -37,8 +37,8 @@ public class MainActivityTest {
     @Test
     @UiThreadTest
     public void checkEditTextPassword1(){
-        assertNotNull(mActivity.findViewById(R.id.etpassword_1));
-        text = mActivity.findViewById(R.id.etpassword_1);
+        assertNotNull(mActivity.findViewById(R.id.etPassword));
+        text = mActivity.findViewById(R.id.etPassword);
         text.setText("123456789");
         assertEquals("123456789",text.getText().toString());
 
@@ -46,8 +46,8 @@ public class MainActivityTest {
     @Test
     @UiThreadTest
     public void checkEditTextPassword2(){
-        assertNotNull(mActivity.findViewById(R.id.etpassword_1));
-        text = mActivity.findViewById(R.id.etpassword_1);
+        assertNotNull(mActivity.findViewById(R.id.etPassword));
+        text = mActivity.findViewById(R.id.etPassword);
         text.setText("abcdefghj");
         assertEquals("abcdefghj",text.getText().toString());
 
@@ -57,8 +57,8 @@ public class MainActivityTest {
     @Test
     @UiThreadTest
     public void checkEditTextPassword3(){
-        assertNotNull(mActivity.findViewById(R.id.etpassword_1));
-        text = mActivity.findViewById(R.id.etpassword_1);
+        assertNotNull(mActivity.findViewById(R.id.etPassword));
+        text = mActivity.findViewById(R.id.etPassword);
         text.setText("123321abcdefg");
         assertEquals("123321abcdefg",text.getText().toString());
 
