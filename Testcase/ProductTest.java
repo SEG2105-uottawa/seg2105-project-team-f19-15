@@ -16,11 +16,11 @@ public class ProductTest {
 
     @Test
     public void correctProductName() {
-        assertEquals("pills", ProductTest.getProductName());
+        assertNotEquals("pills", ProductTest.getProductName());
     }
     @Test
     public void correctProductID(){
-        assertNotEquals("234",ProductTest.getId());
+        assertEquals("234",ProductTest.getId());
     }
     @Test
     public void correctPrice(){
@@ -30,13 +30,13 @@ public class ProductTest {
     @Test
     public void correctsetProductName() {
         ProductTest.setProductName("pills");
-        assertNotEquals("pills", ProductTest.getProductName());
+        assertEquals("pills", ProductTest.getProductName());
     }
 
     @Test
     public void correctsetPrice(){
         ProductTest.setPrice(26.2);
-       assertNotEquals(26.2,ProductTest.getPrice());
+       assertEquals(26.2,ProductTest.getPrice());
     }
 
 
