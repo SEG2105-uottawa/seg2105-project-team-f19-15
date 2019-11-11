@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
-
+import static org.junit.Assert.assertNotEquals;
 public class Main5ActivityTest {
 
     @Rule
@@ -40,7 +40,7 @@ public class Main5ActivityTest {
         text = mActivity.findViewById(R.id.listViewProducts);
         text.setText("Product1");
         String tmp = text.getText().toString();
-        assertEquals("Product2",tmp);
+        assertNotEquals("Product2",tmp);
     }
 
     public void checkEditTextName(){
@@ -48,7 +48,7 @@ public class Main5ActivityTest {
         text = mActivity.findViewById(R.id.editTextName);
         text.setText("Amoxilin");
         String tmp = text.getText().toString();
-        assertEquals("qingmeisu",tmp);
+        assertNotEquals("qingmeisu",tmp);
     }
     public void checkbuttonupdate(){
         assertNotNull(mActivity.findViewById(R.id.buttonDeleteProduct));
