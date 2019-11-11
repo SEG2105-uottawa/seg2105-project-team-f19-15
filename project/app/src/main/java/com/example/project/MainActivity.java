@@ -19,7 +19,7 @@ public class MainActivity extends Activity  {
     private CheckBox employee;
     private CheckBox patient;
     private MyDBHandler db;
-    private String id="admin";
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class MainActivity extends Activity  {
         employee= (CheckBox)findViewById(R.id.cbEmployee2);
         patient= (CheckBox)findViewById(R.id.cbPatient2);
         db= new MyDBHandler(this);
+        id= null;
 
         employee.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +60,7 @@ public class MainActivity extends Activity  {
                 String name= username.getText().toString();
                 String password= password_1.getText().toString();
 
-                if(name.equals("admin") && password.equals("5T5ptQ")){
+                if(name.equals("Admin") && password.equals("5T5ptQ") && id== null){
                     if(id== "employee" || id== "patient"){
                         Toast.makeText(getApplicationContext(), "This is an admin account. Any identity should not be chosen.", Toast.LENGTH_SHORT).show();
                     }else{
@@ -69,24 +70,20 @@ public class MainActivity extends Activity  {
                 }
 
                 boolean findUser= db.findUser(name, password, id);
-                if(findUser== true){
-                    Toast.makeText(getApplicationContext(), "Welcome "+ name+ ", you are logged in as "+ id+ ".", Toast.LENGTH_SHORT).show();
-                    if(id== "employee"){
-                        startActivity(new Intent(MainActivity.this, Main10Activity.class));
-                        Intent intent_login = new Intent(getApplicationContext(),Main10Activity.class);
-                        intent_login.putExtra("username",username.getText().toString());
-                        startActivity(intent_login);
-                    }else if(id== "patient"){
-                        startActivity(new Intent(MainActivity.this, Main2Activity.class));
-                        Intent intent_login = new Intent(getApplicationContext(),Main2Activity.class);
-                        intent_login.putExtra("username",username.getText().toString());
-                        startActivity(intent_login);
-                    }
-
-                }else{
-                    if(id!="admin")
+                if(id!= null){
+                    if(findUser){
+                        Toast.makeText(getApplicationContext(), "Welcome "+ name+ ", you are logged in as "+ id+ ".", Toast.LENGTH_SHORT).show();
+                        if(id== "employee"){
+                            startActivity(new Intent(MainActivity.this, Main10Activity.class));
+                        }else if(id== "patient"){
+                            startActivity(new Intent(MainActivity.this, Main2Activity.class));
+                        }
+                    }else{
                         Toast.makeText(getApplicationContext(), "Wrong username or password.", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+
 
             }
         });
