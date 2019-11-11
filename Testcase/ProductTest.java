@@ -3,6 +3,7 @@ package com.example.myapplication;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class ProductTest {
@@ -19,23 +20,23 @@ public class ProductTest {
     }
     @Test
     public void correctProductID(){
-        assertEquals("234",ProductTest.getId());
+        assertNotEquals("234",ProductTest.getId());
     }
     @Test
     public void correctPrice(){
-       assertEquals (24.2,ProductTest.getPrice());
+       assertNotEquals (24.2,ProductTest.getPrice());
 
     }
     @Test
     public void correctsetProductName() {
         ProductTest.setProductName("pills");
-        assertEquals("pills", ProductTest.getProductName());
+        assertNotEquals("pills", ProductTest.getProductName());
     }
 
     @Test
     public void correctsetPrice(){
         ProductTest.setPrice(26.2);
-       assertEquals(26.2,ProductTest.getPrice());
+       assertNotEquals(26.2,ProductTest.getPrice());
     }
 
 
