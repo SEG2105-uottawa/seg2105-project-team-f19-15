@@ -38,4 +38,9 @@ public class Product {
     public double getPrice() {
         return _price;
     }
+    public void setPerson(String person) {
+        _person = person;
+    }
+    public String getPerson(){return _person;}
+
 }
