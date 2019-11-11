@@ -37,6 +37,8 @@ public class Main3Activity extends AppCompatActivity {
         employee=(CheckBox)findViewById(R.id.cbEmployee);
         patient=(CheckBox)findViewById(R.id.cbPatient);
 
+        id= null;
+
         employee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,13 +72,11 @@ public class Main3Activity extends AppCompatActivity {
 
                 }else{
                     if(password1.equals(password2)){
-                        boolean checkUsername= db.checkUsername(name);
                         if(isEmail(email)){
-                            if(checkUsername== true){
+                            boolean checkUsername= db.checkUsername(name);
+                            if(checkUsername){
                                 boolean insert= db.insert(name, email, password1, id);
-
-
-                                if(insert== true){
+                                if(insert){
                                     Toast.makeText(getApplicationContext(), "You have registered successfully as a "+ id + ".", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(Main3Activity.this, MainActivity.class));
                                 }
@@ -89,7 +89,7 @@ public class Main3Activity extends AppCompatActivity {
 
                         }
 
-                        
+
                     }else{
                         Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
                     }
