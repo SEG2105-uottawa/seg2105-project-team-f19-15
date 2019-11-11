@@ -3,22 +3,21 @@ package com.example.project;
 
 public class Product {
     private String _id;
-    private String _productname;
+    private String _productName;
     private double _price;
     private String _person;
 
     public Product() {
     }
-    public Product(String id, String productname, double price, String person) {
+    public Product(String id, String productName, double price, String person) {
         _id = id;
-        _productname = productname;
+        _productName = productName;
         _price = price;
-        _person=person;
+        _person =person;
     }
-    public Product(String productname, double price, String person) {
-        _productname = productname;
+    public Product(String productName, double price) {
+        _productName = productName;
         _price = price;
-        _person= person;
     }
 
     public void setId(String id) {
@@ -27,11 +26,11 @@ public class Product {
     public String getId() {
         return _id;
     }
-    public void setProductName(String productname) {
-        _productname = productname;
+    public void setProductName(String productName) {
+        _productName = productName;
     }
     public String getProductName() {
-        return _productname;
+        return _productName;
     }
     public void setPrice(double price) {
         _price = price;
@@ -39,9 +38,4 @@ public class Product {
     public double getPrice() {
         return _price;
     }
-    public void set_person(String person){_person=person;}
-    public String getPerson() {
-        return  _person;
-    }
-
 }
