@@ -31,7 +31,7 @@ public class Main5ActivityTest {
         assertNotNull(mActivity.findViewById(R.id.editTextPrice));
         text = mActivity.findViewById(R.id.editTextPrice);
         text.setText("4r45gg");
-        assertEquals(false,text.getText().toString());
+        assertEquals("4r45gg",text.getText().toString());
 
     }
 
