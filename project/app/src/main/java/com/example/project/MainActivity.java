@@ -60,7 +60,7 @@ public class MainActivity extends Activity  {
                 String name= username.getText().toString();
                 String password= password_1.getText().toString();
 
-                if(name.equals("Admin") && password.equals("5T5ptQ") && id== null){
+                if(name.equals("admin") && password.equals("5T5ptQ") && id== null){
                     if(id== "employee" || id== "patient"){
                         Toast.makeText(getApplicationContext(), "This is an admin account. Any identity should not be chosen.", Toast.LENGTH_SHORT).show();
                     }else{
@@ -75,8 +75,13 @@ public class MainActivity extends Activity  {
                         Toast.makeText(getApplicationContext(), "Welcome "+ name+ ", you are logged in as "+ id+ ".", Toast.LENGTH_SHORT).show();
                         if(id== "employee"){
                             startActivity(new Intent(MainActivity.this, Main10Activity.class));
+                            Intent intent_login = new Intent(getApplicationContext(),Main10Activity.class);
+                            intent_login.putExtra("username",username.getText().toString());
                         }else if(id== "patient"){
                             startActivity(new Intent(MainActivity.this, Main2Activity.class));
+                            Intent intent_login = new Intent(getApplicationContext(),Main2Activity.class);
+                            intent_login.putExtra("username",username.getText().toString());
+                            startActivity(intent_login);
                         }
                     }else{
                         Toast.makeText(getApplicationContext(), "Wrong username or password.", Toast.LENGTH_SHORT).show();
