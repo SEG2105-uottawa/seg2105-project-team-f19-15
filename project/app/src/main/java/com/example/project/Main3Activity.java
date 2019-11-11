@@ -71,17 +71,25 @@ public class Main3Activity extends AppCompatActivity {
                 }else{
                     if(password1.equals(password2)){
                         boolean checkUsername= db.checkUsername(name);
+                        if(isEmail(email)){
+                            if(checkUsername== true){
+                                boolean insert= db.insert(name, email, password1, id);
 
-                        if(checkUsername== true){
-                            boolean insert= db.insert(name, email, password1, id);
 
-                            if(insert== true){
-                                Toast.makeText(getApplicationContext(), "You have registered successfully as a "+ id + ".", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Main3Activity.this, MainActivity.class));
+                                if(insert== true){
+                                    Toast.makeText(getApplicationContext(), "You have registered successfully as a "+ id + ".", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(Main3Activity.this, MainActivity.class));
+                                }
+                            }else{
+                                Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
                             }
+
                         }else{
-                            Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Wrong email type", Toast.LENGTH_SHORT).show();
+
                         }
+
+                        
                     }else{
                         Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
                     }
@@ -98,6 +106,18 @@ public class Main3Activity extends AppCompatActivity {
         });
 
 
+
+
     }
+    private boolean isEmail(String email){
+        String s = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+        if (email.isEmpty()) {
+            return false;
+        } else {
+            return email.matches(s);
+        }
+
+    }
+
 
 }
