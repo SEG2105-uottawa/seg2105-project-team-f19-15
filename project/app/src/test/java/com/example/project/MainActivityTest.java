@@ -1,4 +1,5 @@
-package com.example.myapplication;
+    
+package com.example.project;
 
 
 import android.widget.TextView;
