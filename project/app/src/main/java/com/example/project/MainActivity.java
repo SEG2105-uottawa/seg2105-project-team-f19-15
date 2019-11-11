@@ -77,6 +77,7 @@ public class MainActivity extends Activity  {
                             startActivity(new Intent(MainActivity.this, Main10Activity.class));
                             Intent intent_login = new Intent(getApplicationContext(),Main10Activity.class);
                             intent_login.putExtra("username",username.getText().toString());
+                            startActivity(intent_login);
                         }else if(id== "patient"){
                             startActivity(new Intent(MainActivity.this, Main2Activity.class));
                             Intent intent_login = new Intent(getApplicationContext(),Main2Activity.class);
