@@ -72,8 +72,8 @@ public class Main9Activity extends AppCompatActivity {
                     StringBuffer buffer= new StringBuffer();
                     while(cursor.moveToNext()){
                         buffer.append("username:"+ cursor.getString(0)+ "\n");
-                        buffer.append("password: "+ cursor.getString(1)+ "\n");
-                        buffer.append("email: "+ cursor.getString(2)+ "\n");
+                        buffer.append("email: "+ cursor.getString(1)+ "\n");
+                        buffer.append("password: "+ cursor.getString(2)+ "\n");
                         buffer.append("identity: "+ cursor.getString(3)+ "\n\n");
                     }
 
