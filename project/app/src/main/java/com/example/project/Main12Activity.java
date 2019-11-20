@@ -27,7 +27,7 @@ public class Main12Activity extends AppCompatActivity {
     private int day;
     private CalendarView calendarView;
     private MyDBHandler db;
-
+    private Button Find;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +37,7 @@ public class Main12Activity extends AppCompatActivity {
         EndingHours = (EditText)findViewById(R.id.EndingHours);
         EndingMinutes=(EditText)findViewById(R.id.EndingMinutes);
         Set = (Button)findViewById(R.id.Set);
+        Find = (Button)findViewById(R.id.Find);
         db= new MyDBHandler(this);
         calendarView = (CalendarView)findViewById(R.id.calendarView) ;
         //  calendarView.setOnClickListener((View.OnClickListener) this);
@@ -72,14 +73,20 @@ public class Main12Activity extends AppCompatActivity {
 
             }
         });
+        //You may need to enter the StartingTime and EndingTime to check the working hours
+        Find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(StartHours.getText().toString() == null || EndingHours.getText().toString()==null){
+                    Toast.makeText(getApplicationContext(),"Please enter the StartingHours and EndingHours",Toast.LENGTH_SHORT).show();
+                }else if(Integer.valueOf(StartHours.getText().toString())>13||Integer.valueOf(EndingHours.getText().toString())>13){
+                    Toast.makeText(getApplicationContext(),"reEnter please",Toast.LENGTH_SHORT).show();
+                }else{
+                    db.selectTime(Integer.valueOf(StartHours.getText().toString()),Integer.valueOf(EndingHours.getText().toString()));
 
-
-
-
-
-
-
-
+                }
+            }
+        });
 
 
 
