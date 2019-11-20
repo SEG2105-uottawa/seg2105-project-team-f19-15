@@ -80,6 +80,28 @@ public class MyDBHandler extends SQLiteOpenHelper{
             return true;
         }
     }
+    //find startingTime or EndingTime
+    public ChooseTime selectTime(int StartingHours,int EndingHours){
+        SQLiteDatabase db = getReadableDatabase();
+        String sql = "select StartingHours,StartingMinutes.EndingHours and EndingMinutes from ChooseTime where StartingHours and EndingHours=\"" + StartingHours+EndingHours;
+        Cursor cursor = db.rawQuery(sql, null);
+       ChooseTime chooseTime = new ChooseTime();
+        if (cursor.moveToFirst()) {
+            chooseTime.setStartHours(cursor.getInt(0));
+           chooseTime.setStartMinutes(cursor.getInt(1));
+            chooseTime.setEndingHours(cursor.getInt(2));
+            chooseTime.setEndingMinutes(cursor.getInt(3));
+        }
+        //用户不存在
+        else {
+            chooseTime = null;
+        }
+        cursor.close();
+        db.close();
+        return chooseTime;
+    }
+    
+
 
 
     //check if username exists for table named user

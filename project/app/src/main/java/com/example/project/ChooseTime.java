@@ -14,6 +14,9 @@ public class ChooseTime  {
         this.StartingHours = StartingHours;
         this.StartingMinutes = StartingMinutes;
     }
+    public ChooseTime(){
+
+    }
     public int getStartingHours(){
         return  StartingHours;
     }
