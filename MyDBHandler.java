@@ -22,6 +22,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db){
         db.execSQL("Create table user(username text primary key, email text, password text, identity text)");
         db.execSQL("Create table user_2(EndingHours text primary key, EndingMinutes text, StartHours text, StartMinutes text)");
+        db.execSQL("Create table user_3(username text primary key, address text,phoneNum text, clinicName text, Insurance text,Payment text)");
     }
 
     @Override
@@ -112,6 +113,23 @@ public class MyDBHandler extends SQLiteOpenHelper{
         SQLiteDatabase db= this.getWritableDatabase();
         Cursor cursor= db.rawQuery("Select * from user", null);
         return cursor;
+    }
+    
+    public boolean insertPro(String username, String Address, String phoneNum, String clinicName, String Insurance,String Payment){
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put("username", username);
+        contentValues.put("address", Address);
+        contentValues.put("phoneNum", phoneNum);
+        contentValues.put("clinicName", clinicName);
+        contentValues.put("Insurance", Insurance);
+        contentValues.put("Payment", Payment);
+        long ins= db.insert("user_3", null, contentValues);
+        if(ins== -1){
+            return false;
+        }else{
+            return true;
+        }
     }
 }
 
