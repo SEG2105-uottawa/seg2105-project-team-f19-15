@@ -30,6 +30,8 @@ public class Main11Activity extends AppCompatActivity {
         fixService= (Button)findViewById(R.id.button4);
         setHour= (Button)findViewById(R.id.button5);
         save= (Button)findViewById(R.id.button3);
+        Intent intent = getIntent();
+        final String Username = intent.getStringExtra("username");
 
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -47,32 +49,43 @@ public class Main11Activity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please enter more details.", Toast.LENGTH_SHORT).show();
 
                 }else{
-                    if(checkAddress(Address)){
-                        if(checkPho(phoneNum)){
-                            if(checkClinic(clinicName)){
-                                if(checkIns(Insurance)){
-                                    if(checkPay(Payment)){
-                                        boolean insert= db.insert(Address, phoneNum, clinicName, Insurance,Payment);
+                    boolean insert= db.insertPro(Username, Address, phoneNum, clinicName, Insurance,Payment);
+                    if(insert){
+                        Toast.makeText(getApplicationContext(), "You have complete the profile", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "You!!!!!!!!", Toast.LENGTH_SHORT).show();
+
+                    }
+                    //if(checkAddress(Address)){
+                        //if(checkPho(phoneNum)){
+                            //if(checkClinic(clinicName)){
+                                //if(checkIns(Insurance)){
+                                    //if(checkPay(Payment)){
+                                        /*boolean insert= db.insertPro(Username, Address, phoneNum, clinicName, Insurance,Payment);
                                         if(insert){
-                                            Toast.makeText(getApplicationContext(), "You have registered successfully as a "+ id + ".", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "You have complete the profile", Toast.LENGTH_SHORT).show();
                                         }
-                                    }else{
-                                        Toast.makeText(getApplicationContext(), "Wrong payment type", Toast.LENGTH_SHORT).show();
-                                    }
-                                }else{
-                                    Toast.makeText(getApplicationContext(), "Wrong insurance type", Toast.LENGTH_SHORT).show();
-                                }
-                            }else{
-                                Toast.makeText(getApplicationContext(), "Wrong clinic name type", Toast.LENGTH_SHORT).show();
-                            }
-                        }else{
-                            Toast.makeText(getApplicationContext(), "Wrong phone number type", Toast.LENGTH_SHORT).show();
-                        }
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Wrong address type", Toast.LENGTH_SHORT).show();
+                                        else{
+                                            Toast.makeText(getApplicationContext(), "You!!!!!!!!", Toast.LENGTH_SHORT).show();
+
+                                        }*/
+                                    //}else{
+                                        //Toast.makeText(getApplicationContext(), "Wrong payment type", Toast.LENGTH_SHORT).show();
+                                    //}
+                               // }else{
+                                    //Toast.makeText(getApplicationContext(), "Wrong insurance type", Toast.LENGTH_SHORT).show();
+                                //}
+                            //}else{
+                                //Toast.makeText(getApplicationContext(), "Wrong clinic name type", Toast.LENGTH_SHORT).show();
+                           // }
+                        //}else{
+                            //Toast.makeText(getApplicationContext(), "Wrong phone number type", Toast.LENGTH_SHORT).show();
+                        //}
+                    //}else{
+                        //Toast.makeText(getApplicationContext(), "Wrong address type", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
         });
 
         fixService.setOnClickListener(new View.OnClickListener() {
@@ -84,14 +97,14 @@ public class Main11Activity extends AppCompatActivity {
         setHour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Main11Activity.this, MainActivity.class));
+                startActivity(new Intent(Main11Activity.this, Main12Activity.class));
             }
         });
 
     }
 
-    private boolean checkAddress(String Address){
-        String s = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+    /*private boolean checkAddress(String Address){
+        String s = "^[a-zA-Z0-9]";
         if (Address.isEmpty()) {
             return false;
         } else {
@@ -99,7 +112,7 @@ public class Main11Activity extends AppCompatActivity {
         }
     }
     private boolean checkPho(String phoneNum){
-        String s = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+        String s = "^[a-zA-Z0-9]";
         if (phoneNum.isEmpty()) {
             return false;
         } else {
@@ -107,7 +120,7 @@ public class Main11Activity extends AppCompatActivity {
         }
     }
     private boolean checkClinic(String clinicName){
-        String s = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+        String s = "^[a-zA-Z0-9]";
         if (clinicName.isEmpty()) {
             return false;
         } else {
@@ -115,7 +128,7 @@ public class Main11Activity extends AppCompatActivity {
         }
     }
     private boolean checkIns(String Insurance){
-        String s = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+        String s = "^[a-zA-Z0-9]";
         if (Insurance.isEmpty()) {
             return false;
         } else {
@@ -123,13 +136,13 @@ public class Main11Activity extends AppCompatActivity {
         }
     }
     private boolean checkPay(String Payment){
-        String s = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+        String s = "^[a-zA-Z0-9]";
         if (Payment.isEmpty()) {
             return false;
         } else {
             return Payment.matches(s);
         }
-    }
+    }*/
 
 
 }
