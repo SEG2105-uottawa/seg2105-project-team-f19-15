@@ -80,6 +80,38 @@ public class MyDBHandler extends SQLiteOpenHelper{
             return true;
         }
     }
+    //If there are mistakes, please help me revise
+    public boolean insertSer(String username, String service){
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put("username", username);
+        contentValues.put("service", service);
+        long ins= db.insert("user", null, contentValues);
+        if(ins== -1){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    public void createTable(String username,String service){
+        SQLiteDatabase db= this.getWritableDatabase();
+        String createTable ="CREATE TABLE IF NOT EXISTS" + username+
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    "username VARCHAR(32),"+
+                    "service VARCHAR(15))";
+        db.execSQL(createTable);
+        Cursor cur =db.rawQuery("SELECT * FROM"+username,null);
+    }
+
+    public void update(String username,String service,int id){
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put("username", username);
+        contentValues.put("service", service);
+
+        db.update(username,contentValues,"_id="+id,null);
+
+    }
 
 
 
