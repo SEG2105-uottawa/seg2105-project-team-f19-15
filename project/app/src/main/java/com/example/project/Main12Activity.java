@@ -28,6 +28,8 @@ public class Main12Activity extends AppCompatActivity {
     private CalendarView calendarView;
     private MyDBHandler db;
     private Button Find;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +66,10 @@ public class Main12Activity extends AppCompatActivity {
                     chooseTime.setStartMinutes(Integer.valueOf(StartMinutes.getText().toString().trim()));
                     chooseTime.setEndingHours(Integer.valueOf(EndingHours.getText().toString().trim()));
                     chooseTime.setEndingMinutes(Integer.valueOf(EndingMinutes.getText().toString().trim()));
-                    db.insert_WorkingTime(chooseTime);
-
+                    boolean insert= db.insert_WorkingTime(chooseTime);
+                    if(insert){
+                        Toast.makeText(getApplicationContext(),"Time has been set up successfully! ",Toast.LENGTH_SHORT).show();
+                    }
 
 
                 }
