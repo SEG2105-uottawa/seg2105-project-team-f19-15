@@ -22,7 +22,8 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db){
         db.execSQL("Create table user(username text primary key, email text, password text, identity text)");
         db.execSQL("Create table time(EndingHours text primary key, EndingMinutes text, StartHours text, StartMinutes text)");
-        db.execSQL("Create table user_employee(username text primary key, address text,phoneNum text, clinicName text, Insurance text,Payment text)");
+        db.execSQL("Create table user_employee(username text, address text,phoneNum text, clinicName text, Insurance text,Payment text)");
+        db.execSQL("Create table user_service(username textVARCHAR(32), service textVARCHAR(15))");
     }
 
     @Override
@@ -30,6 +31,8 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.execSQL("drop table if exists user");
         db.execSQL("drop table if exists time");
         db.execSQL("drop table if exists user_employee");
+        db.execSQL("drop table if exists user_service");
+        onCreate(db);
     }
 
 
@@ -65,6 +68,18 @@ public class MyDBHandler extends SQLiteOpenHelper{
             return true;
         }
     }
+    public boolean insertSer(String username, String service){
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put("username", username);
+        contentValues.put("service", service);
+        long ins= db.insert("user_service", null, contentValues);
+        if(ins== -1){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
     public boolean insert_WorkingTime(ChooseTime chooseTime){
         SQLiteDatabase db= this.getWritableDatabase();
@@ -80,62 +95,6 @@ public class MyDBHandler extends SQLiteOpenHelper{
             return true;
         }
     }
-    //If there are mistakes, please help me revise
-    public boolean insertSer(String username, String service){
-        SQLiteDatabase db= this.getWritableDatabase();
-        ContentValues contentValues= new ContentValues();
-        contentValues.put("username", username);
-        contentValues.put("service", service);
-        long ins= db.insert("user", null, contentValues);
-        if(ins== -1){
-            return false;
-        }else{
-            return true;
-        }
-    }
-    public void createTable(String username,String service){
-        SQLiteDatabase db= this.getWritableDatabase();
-        String createTable ="CREATE TABLE IF NOT EXISTS" + username+
-                "(_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    "username VARCHAR(32),"+
-                    "service VARCHAR(15))";
-        db.execSQL(createTable);
-        Cursor cur =db.rawQuery("SELECT * FROM"+username,null);
-    }
-
-    public void update(String username,String service,int id){
-        SQLiteDatabase db= this.getWritableDatabase();
-        ContentValues contentValues= new ContentValues();
-        contentValues.put("username", username);
-        contentValues.put("service", service);
-
-        db.update(username,contentValues,"_id="+id,null);
-
-    }
-
-
-
-    //find startingTime or EndingTime
-    public ChooseTime selectTime(int StartingHours,int EndingHours){
-        SQLiteDatabase db = getReadableDatabase();
-        String sql = "select StartingHours,StartingMinutes.EndingHours and EndingMinutes from ChooseTime where StartingHours and EndingHours=\"" + StartingHours+EndingHours;
-        Cursor cursor = db.rawQuery(sql, null);
-       ChooseTime chooseTime = new ChooseTime();
-        if (cursor.moveToFirst()) {
-            chooseTime.setStartHours(cursor.getInt(0));
-           chooseTime.setStartMinutes(cursor.getInt(1));
-            chooseTime.setEndingHours(cursor.getInt(2));
-            chooseTime.setEndingMinutes(cursor.getInt(3));
-        }
-        else {
-            chooseTime = null;
-        }
-        cursor.close();
-        db.close();
-        return chooseTime;
-    }
-    
-
 
 
     //check if username exists for table named user
@@ -147,6 +106,24 @@ public class MyDBHandler extends SQLiteOpenHelper{
         }else{
             return true;
         }
+    }
+    public ChooseTime selectTime(int StartingHours,int EndingHours){
+        SQLiteDatabase db = getReadableDatabase();
+        String sql = "select StartingHours,StartingMinutes.EndingHours and EndingMinutes from ChooseTime where StartingHours and EndingHours=\"" + StartingHours+EndingHours;
+        Cursor cursor = db.rawQuery(sql, null);
+        ChooseTime chooseTime = new ChooseTime();
+        if (cursor.moveToFirst()) {
+            chooseTime.setStartHours(cursor.getInt(0));
+            chooseTime.setStartMinutes(cursor.getInt(1));
+            chooseTime.setEndingHours(cursor.getInt(2));
+            chooseTime.setEndingMinutes(cursor.getInt(3));
+        }
+        else {
+            chooseTime = null;
+        }
+        cursor.close();
+        db.close();
+        return chooseTime;
     }
 
     //find person by checking username and password in user table
@@ -192,14 +169,16 @@ public class MyDBHandler extends SQLiteOpenHelper{
         Cursor cursor= db.rawQuery("Select * from user", null);
         return cursor;
     }
-
-    //show all available time
     public Cursor viewAll(){
         SQLiteDatabase db= this.getWritableDatabase();
         Cursor cursor= db.rawQuery("Select * from time", null);
         return cursor;
     }
+
+    public Cursor seeAll(){
+        SQLiteDatabase db= this.getWritableDatabase();
+        Cursor cursor= db.rawQuery("Select * from user_service", null);
+        return cursor;
+    }
 }
-
-
 
