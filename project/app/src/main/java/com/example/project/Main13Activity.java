@@ -25,27 +25,27 @@ import java.util.List;
 
 public class Main13Activity extends AppCompatActivity {
     private EditText etService;
-    private Button add;
-    private Button delete;
-    ListView listViewProducts;
+    private Button add, listService;
+    private MyDBHandler db;
+    private ListView list;
     List<Product> products;
     DatabaseReference databaseProducts;
-    Intent intent = getIntent();
-    final String username = intent.getStringExtra("username");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main12);
+        setContentView(R.layout.activity_main13);
         databaseProducts = FirebaseDatabase.getInstance().getReference("clinics");
-
+        db= new MyDBHandler(this);
         etService = (EditText) findViewById(R.id.editText);
         add = (Button) findViewById(R.id.button7);
-        delete = (Button) findViewById(R.id.button8);
-        listViewProducts = (ListView) findViewById(R.id.listViewProducts);
+        listService= (Button) findViewById(R.id.btnListSerivice);
+        Intent intent = getIntent();
+        final String Username = intent.getStringExtra("username");
+        list = (ListView) findViewById(R.id.list);
         products = new ArrayList<>();
         databaseProducts = FirebaseDatabase.getInstance().getReference("products");
-        listViewProducts.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Product product = products.get(i);
@@ -53,61 +53,44 @@ public class Main13Activity extends AppCompatActivity {
                 return true;
             }
         });
-        /*add.setOnClickListener(new View.OnClickListener() {
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                addProduct();
+            public void onClick(View v) {
+                String service = etService.getText().toString();
+                if (service.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please enter more details.", Toast.LENGTH_SHORT).show();
+                } else {
+                    boolean insert = db.insertSer(Username, service);
+                    if (insert) {
+                        Toast.makeText(getApplicationContext(), "You have add the service", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Haven't added", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
             }
         });
-        delete.setOnClickListener(new View.OnClickListener() {
+
+        listService.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                deleteProduct();
+            public void onClick(View v) {
+                Cursor cursor= db.seeAll();
+                if(cursor.getCount()== 0){
+                    Toast.makeText(getApplicationContext(), "No item to show at this time.", Toast.LENGTH_SHORT).show();
+                }else{
+                    StringBuffer buffer= new StringBuffer();
+                    while(cursor.moveToNext()){
+                        buffer.append("username:"+ cursor.getString(0)+ "\n");
+                        buffer.append("service: "+ cursor.getString(1)+ "\n\n");
+
+                    }
+
+                    show("User and Service", buffer.toString());
+                }
             }
         });
-
-
-
-
-
-
     }
-    /*private void addProduct() {
-        String Service=etService.getText().toString();
-        if(!TextUtils.isEmpty(Service)){
-            String id = databaseProducts.push().getKey();
-            Clinic clinic = new Clinic(username, Service,true);
-            databaseProducts.child(id).setValue(clinic);
-            //displaying a success toast
-            Toast.makeText(this, "service added", Toast.LENGTH_LONG).show();
 
-        }
-
-        else {
-            //if the value is not given displaying a toast
-            Toast.makeText(this, "Please Enter a Name", Toast.LENGTH_LONG).show();
-        }
-
-    }
-    /*private void deleteProduct(){
-        String Service=etService.getText().toString();
-        if(!TextUtils.isEmpty(Service)){
-            String id = databaseProducts.push().getKey();
-            Clinic clinic = new Clinic(username, Service,false);
-            databaseProducts.child(id).setValue(clinic);
-            //displaying a success toast
-            Toast.makeText(this, "service added", Toast.LENGTH_LONG).show();
-
-        }
-
-        else {
-            //if the value is not given displaying a toast
-            Toast.makeText(this, "Please Enter a Name", Toast.LENGTH_LONG).show();
-        }
-
-    }*/
-
-    }
     private void showUpdateDeleteDialog ( final String productId, String productName){
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -120,5 +103,13 @@ public class Main13Activity extends AppCompatActivity {
         b.show();
 
 
+    }
+
+    private void show(String title, String message){
+        AlertDialog.Builder builder= new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 }
