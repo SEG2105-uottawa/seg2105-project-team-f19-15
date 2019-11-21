@@ -88,7 +88,7 @@ public class Main11Activity extends AppCompatActivity implements View.OnFocusCha
         fixService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Main11Activity.this, MainActivity.class));
+                startActivity(new Intent(Main11Activity.this, Main13Activity.class));
             }
         });
         setHour.setOnClickListener(new View.OnClickListener() {
