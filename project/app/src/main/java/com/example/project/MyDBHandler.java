@@ -80,6 +80,9 @@ public class MyDBHandler extends SQLiteOpenHelper{
             return true;
         }
     }
+
+
+
     //find startingTime or EndingTime
     public ChooseTime selectTime(int StartingHours,int EndingHours){
         SQLiteDatabase db = getReadableDatabase();
@@ -92,7 +95,6 @@ public class MyDBHandler extends SQLiteOpenHelper{
             chooseTime.setEndingHours(cursor.getInt(2));
             chooseTime.setEndingMinutes(cursor.getInt(3));
         }
-        //用户不存在
         else {
             chooseTime = null;
         }
@@ -156,6 +158,13 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public Cursor showAll(){
         SQLiteDatabase db= this.getWritableDatabase();
         Cursor cursor= db.rawQuery("Select * from user", null);
+        return cursor;
+    }
+
+    //show all available time
+    public Cursor viewAll(){
+        SQLiteDatabase db= this.getWritableDatabase();
+        Cursor cursor= db.rawQuery("Select * from time", null);
         return cursor;
     }
 }
