@@ -134,6 +134,8 @@ public class Main12ActivityTest {
         assertNotEquals("abc",text.getText().toString());
 
     }
+    @Test
+    @UiThreadTest
     public void checkbuttonupdate(){
         assertNotNull(mActivity.findViewById(R.id.Set));
         ssertNotNull(mActivity.findViewById(R.id.Find);
