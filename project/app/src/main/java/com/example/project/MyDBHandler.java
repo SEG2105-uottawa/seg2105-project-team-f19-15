@@ -69,7 +69,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public boolean insert_WorkingTime(ChooseTime chooseTime){
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues contentValues= new ContentValues();
-        contentValues.put("StartingHours", chooseTime.getStartingHours());
+        contentValues.put("StartHours", chooseTime.getStartingHours());
         contentValues.put("StartMinutes",chooseTime.getStartingMinutes() );
         contentValues.put("EndingHours",chooseTime.getEndingHours());
         contentValues.put("EndingMinutes",chooseTime.getEndingMinutes() );
