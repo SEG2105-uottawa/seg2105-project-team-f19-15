@@ -6,7 +6,7 @@ class Admin
   1 -- * Employee;
   1 -- * Patient;
   1 -- 1 Login;
-  * -- * Service;
+  1 -- 8 Service;
 }
 
 class Employee
@@ -17,8 +17,9 @@ class Employee
   password;
   1 -- 1 Register;
   1 -- 1 Login;
-  1 -- * WalkInClinic;
+  1 -- 1 WalkInClinic;
   1 -- 1 WorkingHours;
+  * -- * Service;
 }
 
 class Patient
@@ -60,14 +61,14 @@ class Service
   Botton add;
   Botton edit;
   Botton delete;
-  * -- * WalkInClinic;
+  int rate;
+1..* -- * WalkInClinic;
 }
 
 class WalkInClinic
 {
   Botton information;
   clinic;
-  
 }
 
 class WorkingHours
