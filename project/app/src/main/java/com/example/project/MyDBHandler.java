@@ -24,6 +24,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.execSQL("Create table time(EndingHours text primary key, EndingMinutes text, StartHours text, StartMinutes text)");
         db.execSQL("Create table user_employee(username text, address text,phoneNum text, clinicName text, Insurance text,Payment text)");
         db.execSQL("Create table user_service(username textVARCHAR(32), service textVARCHAR(15))");
+        db.execSQL("Create table booking(user_name textVARCHAR(32), year textVARCHAR(16),month textVARCHAR(12),day textVARCHAR(64),hour textVARCHAR(32),minutes textVARCHAR(32) ,service_name textVARCHAR(32),notes textVARCHAR(32)) ");
     }
 
     @Override
@@ -32,6 +33,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         db.execSQL("drop table if exists time");
         db.execSQL("drop table if exists user_employee");
         db.execSQL("drop table if exists user_service");
+        db.execSQL("drop table if exists booking");
         onCreate(db);
     }
 
@@ -45,6 +47,22 @@ public class MyDBHandler extends SQLiteOpenHelper{
         contentValues.put("password", password);
         contentValues.put("identity", identity);
         long ins= db.insert("user", null, contentValues);
+        if(ins== -1){
+            return false;
+        }else{
+            return true;
+        }
+    }
+     public boolean insert_booking(Booking_appoinment booking){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username",booking.getUser_name());
+        contentValues.put("service",booking.getService_name());
+        contentValues.put("year",booking.getYear());
+        contentValues.put("month",booking.getMonth());
+        contentValues.put("day",booking.getDay());
+        contentValues.put("notes",booking.getNotes());
+        long ins= db.insert("booking", null, contentValues);
         if(ins== -1){
             return false;
         }else{
