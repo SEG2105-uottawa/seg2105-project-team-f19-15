@@ -53,7 +53,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
             return true;
         }
     }
-     public boolean insert_booking(Booking_appoinment booking){
+     public boolean insert_booking(Booking_appointment booking){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username",booking.getUser_name());
