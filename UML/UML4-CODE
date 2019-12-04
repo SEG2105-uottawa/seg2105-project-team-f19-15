@@ -1,0 +1,81 @@
+generate Java;
+
+class Admin
+{
+     
+  1 -- * Employee;
+  1 -- * Patient;
+  1 -- 1 Login;
+  1 -- * Service;
+}
+
+class Employee
+{
+     
+  name;
+  username;
+  password;
+  1 -- 1 Register;
+  1 -- 1 Login;
+  * -- * Service;
+}
+
+class Patient
+{
+     
+  name;
+  username;
+  password;
+  1 -- 1 Register;
+  * -- 1 WaitTable;
+}
+
+class Login
+{
+  username;
+password;
+errorText;
+Botton loginConfirm;
+1 -- 1 Welcome;
+    1 -- 1 Patient;
+}
+
+class Register
+{
+  username;
+  password;
+  passwordConfirm;
+  }
+
+class Welcome
+{
+  username;
+  userType;
+  welcomeText;
+}
+
+class Service
+{
+  serviceName;
+  Botton add;
+  Botton edit;
+  Botton delete;
+  int rate;
+
+}
+
+class Clinic
+{
+  profile;
+  workingHours;
+  address;
+  1 -- 1..* Employee;
+  * -- * Service;
+  1 -- 1 WaitTable;
+}
+
+class WaitTable
+{
+  int patient;
+  int waitTime;
+}
