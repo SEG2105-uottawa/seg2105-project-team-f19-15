@@ -35,6 +35,13 @@ public class MainBookCheckActivity extends AppCompatActivity {
 
         db = new MyDBHandler(this);
 
+        BookAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainBookCheckActivity.this, Main14Activity.class));
+            }
+        });
+        
         rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
